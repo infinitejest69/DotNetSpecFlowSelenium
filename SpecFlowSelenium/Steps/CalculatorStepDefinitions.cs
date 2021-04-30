@@ -1,4 +1,5 @@
-﻿using TechTalk.SpecFlow;
+﻿using FluentAssertions;
+using TechTalk.SpecFlow;
 
 namespace SpecFlowSelenium.Steps
 {
@@ -6,7 +7,10 @@ namespace SpecFlowSelenium.Steps
     public sealed class CalculatorStepDefinitions
     {
 
-        // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
+        private int number1 { get; set; }
+        private int number2 { get; set; }
+        private int result { get; set; }
+
 
         private readonly ScenarioContext _scenarioContext;
 
@@ -18,41 +22,25 @@ namespace SpecFlowSelenium.Steps
         [Given("the first number is (.*)")]
         public void GivenTheFirstNumberIs(int number)
         {
-            //TODO: implement arrange (precondition) logic
-            // For storing and retrieving scenario-specific data see https://go.specflow.org/doc-sharingdata
-            // To use the multiline text or the table argument of the scenario,
-            // additional string/Table parameters can be defined on the step definition
-            // method. 
-
-            _scenarioContext.Pending();
+            number1 = number;
         }
 
         [Given("the second number is (.*)")]
         public void GivenTheSecondNumberIs(int number)
         {
-            //TODO: implement arrange (precondition) logic
-            // For storing and retrieving scenario-specific data see https://go.specflow.org/doc-sharingdata
-            // To use the multiline text or the table argument of the scenario,
-            // additional string/Table parameters can be defined on the step definition
-            // method. 
-
-            _scenarioContext.Pending();
+            number2 = number;
         }
 
         [When("the two numbers are added")]
         public void WhenTheTwoNumbersAreAdded()
         {
-            //TODO: implement act (action) logic
-
-            _scenarioContext.Pending();
+            result = number1 + number2;
         }
 
         [Then("the result should be (.*)")]
         public void ThenTheResultShouldBe(int result)
         {
-            //TODO: implement assert (verification) logic
-
-            _scenarioContext.Pending();
+            result.Should().Be(this.result);
         }
     }
 }
