@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Microsoft.Extensions.Configuration;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -12,38 +13,59 @@ namespace SpecFlowSelenium.Configuration
     {
         private string browser;
         private IWebDriver webDriver;
-        IConfiguration configuration { get; set; }
+        IConfiguration config;
 
 
 
         public WebConfiguration()
         {
+            readConfigFile();
+        }
+
+        private void readConfigFile()
+        {
+            var builder = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("webappsettings.json", optional: false, reloadOnChange: true);
+
+            config = builder.Build();
+            setBrowser();
+            setWebDriver();
+        }
+
+        private void setBrowser()
+        {
+            browser = config.GetSection("Browser").Value.ToLower();
         }
 
         public string getBrowser()
         {
-//            configuration = new ConfigurationBuilder()
-//.AddJsonFile("WebConfiguration.json", true, true)
-//.Build();
-            return configuration.GetSection("Browser").Value.ToLower();
+            return browser;
         }
 
-        public IWebDriver GetWebDriver() {
+        private void setWebDriver()
+        {
             switch (getBrowser())
             {
                 case "chrome":
                     webDriver = new ChromeDriver();
-                    return webDriver;
+                    break;
                 case "firefox":
                     webDriver = new FirefoxDriver();
-                    return webDriver;
+                    break;
                 case "edge":
                     webDriver = new EdgeDriver();
-                    return webDriver;
+                    break;
                 default:
-                    throw new Exception($"Unknown Driver {getBrowser()}");
+                    throw new Exception($"Unknown Driver {config.GetSection("Browser")}");
             }
+            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(int.Parse(config.GetSection("ImplicitWait").Value));
 
+        }
+
+        public IWebDriver GetWebDriver()
+        {
+            return webDriver;
         }
 
     }

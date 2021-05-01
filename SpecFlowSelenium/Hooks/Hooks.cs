@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using OpenQA.Selenium;
 using SpecFlowSelenium.Configuration;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,8 @@ namespace SpecFlowSelenium.Hooks
     class Hooks
     {
 
-        WebConfiguration configuration = new WebConfiguration();
+        WebConfiguration configuration;
+        IWebDriver driver;
 
         public Hooks(WebConfiguration configuration)
         {
@@ -21,7 +23,16 @@ namespace SpecFlowSelenium.Hooks
         [BeforeScenario("web")]
         public void createBrowser()
         {
-           Console.WriteLine( configuration.getBrowser());
+            driver = configuration.GetWebDriver();
+        }        
+
+        [AfterScenario("web")]
+        public void closeBrowser()
+        {
+            driver.Dispose();
+            driver.Close();
         }
+
+
     }
 }
