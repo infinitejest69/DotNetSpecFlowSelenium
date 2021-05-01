@@ -1,9 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
+﻿using BoDi;
 using SpecFlowSelenium.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TechTalk.SpecFlow;
 
 namespace SpecFlowSelenium.Hooks
@@ -12,25 +8,26 @@ namespace SpecFlowSelenium.Hooks
     class Hooks
     {
 
-        WebConfiguration configuration;
-        IWebDriver driver;
+        private readonly IObjectContainer objectContainer;
 
-        public Hooks(WebConfiguration configuration)
+        private static WebConfiguration configuration;
+
+        public Hooks(IObjectContainer objectContainer)
         {
-            this.configuration = configuration;
+            this.objectContainer = objectContainer;
         }
 
         [BeforeScenario("web")]
         public void createBrowser()
         {
-            driver = configuration.GetWebDriver();
-        }        
+            configuration = new WebConfiguration();
+            objectContainer.RegisterInstanceAs<WebConfiguration>(configuration);
+        }
 
         [AfterScenario("web")]
-        public void closeBrowser()
+        public static void closeBrowser()
         {
-            driver.Dispose();
-            driver.Close();
+            configuration.GetWebDriver().Dispose();
         }
 
 

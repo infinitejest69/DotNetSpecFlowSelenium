@@ -1,8 +1,5 @@
 ﻿using OpenQA.Selenium;
 using SpecFlowSelenium.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TechTalk.SpecFlow;
 
 namespace SpecFlowSelenium.Steps

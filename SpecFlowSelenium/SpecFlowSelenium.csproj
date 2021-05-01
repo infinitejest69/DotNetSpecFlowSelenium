@@ -5,6 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Steps\BBC\BBCIPlayerSteps.cs" />
+    <Compile Remove="Steps\BBC\BBCNewsSteps.cs" />
+    <Compile Remove="Steps\BBC\BBCSportsSteps.cs" />
+    <Compile Remove="Steps\BBC\BBCWeatherSteps.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotNetSeleniumExtras.PageObjects.Core" Version="3.12.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
@@ -33,6 +41,15 @@
     <None Update="webappsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="PageObjects\BBC\Sports\SportsHomePage.cs" />
+    <None Include="PageObjects\BBC\Weather\WeatherHomePage.cs" />
+    <None Include="Steps\BBC\iPlayer\BBCIPlayerSteps.cs" />
+    <None Include="Steps\BBC\News\BBCNewsSteps.cs" />
+    <None Include="Steps\BBC\Sports\BBCSportsSteps.cs" />
+    <None Include="Steps\BBC\Weather\BBCWeatherSteps.cs" />
   </ItemGroup>
 
 </Project>

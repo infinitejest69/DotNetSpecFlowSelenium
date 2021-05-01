@@ -1,10 +1,10 @@
-﻿using System;
-using System.IO;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
+using System;
+using System.IO;
 
 namespace SpecFlowSelenium.Configuration
 {
@@ -20,6 +20,8 @@ namespace SpecFlowSelenium.Configuration
         public WebConfiguration()
         {
             readConfigFile();
+            setBrowser();
+            setWebDriver();
         }
 
         private void readConfigFile()
@@ -29,8 +31,7 @@ namespace SpecFlowSelenium.Configuration
     .AddJsonFile("webappsettings.json", optional: false, reloadOnChange: true);
 
             config = builder.Build();
-            setBrowser();
-            setWebDriver();
+
         }
 
         private void setBrowser()
