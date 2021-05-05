@@ -2,23 +2,20 @@ using FluentAssertions;
 using OpenQA.Selenium;
 using SpecFlowSelenium.Configuration;
 using SpecFlowSelenium.PageObjects.BBC.Sports;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TechTalk.SpecFlow;
 
 namespace SpecFlowSelenium.Steps
 {
     [Binding]
 
-     class BBCSportsSteps
+    class BBCSportsSteps
     {
 
-        WebConfiguration config;
+        DriverConfiguration config;
         IWebDriver driver;
         SportsHomePage sportsHomePage;
 
-        public BBCSportsSteps(WebConfiguration configuration)
+        public BBCSportsSteps(DriverConfiguration configuration)
         {
             this.config = configuration;
             driver = configuration.GetWebDriver();

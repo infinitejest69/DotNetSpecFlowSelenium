@@ -2,22 +2,19 @@ using FluentAssertions;
 using OpenQA.Selenium;
 using SpecFlowSelenium.Configuration;
 using SpecFlowSelenium.PageObjects.BBC.News;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TechTalk.SpecFlow;
 
 namespace SpecFlowSelenium.Steps
 {
     [Binding]
-     class BBCNewsSteps
+    class BBCNewsSteps
     {
 
-        WebConfiguration config;
+        DriverConfiguration config;
         IWebDriver driver;
         NewsHomePage newsHome;
 
-        public BBCNewsSteps(WebConfiguration configuration)
+        public BBCNewsSteps(DriverConfiguration configuration)
         {
             this.config = configuration;
             driver = configuration.GetWebDriver();

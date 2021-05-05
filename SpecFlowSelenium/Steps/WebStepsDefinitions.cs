@@ -7,9 +7,9 @@ namespace SpecFlowSelenium.Steps
     [Binding]
     class WebStepsDefinitions
     {
-        WebConfiguration config;
+        DriverConfiguration config;
         IWebDriver driver;
-        public WebStepsDefinitions(WebConfiguration configuration)
+        public WebStepsDefinitions(DriverConfiguration configuration)
         {
             this.config = configuration;
             driver = configuration.GetWebDriver();

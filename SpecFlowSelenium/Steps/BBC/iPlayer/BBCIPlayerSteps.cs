@@ -3,8 +3,6 @@ using OpenQA.Selenium;
 using SpecFlowSelenium.Configuration;
 using SpecFlowSelenium.PageObjects.BBC.iPlayer;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using TechTalk.SpecFlow;
 
 namespace SpecFlowSelenium.Steps
@@ -13,11 +11,11 @@ namespace SpecFlowSelenium.Steps
     class BBCIPlayerSteps
     {
 
-        WebConfiguration config;
+        DriverConfiguration config;
         IWebDriver driver;
         IPlayerHomePage iPlayerHomePage;
 
-        public BBCIPlayerSteps(WebConfiguration configuration)
+        public BBCIPlayerSteps(DriverConfiguration configuration)
         {
             this.config = configuration;
             driver = configuration.GetWebDriver();

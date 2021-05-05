@@ -1,11 +1,8 @@
+using FluentAssertions;
 using OpenQA.Selenium;
 using SpecFlowSelenium.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using TechTalk.SpecFlow;
 using SpecFlowSelenium.PageObjects.BBC.Weather;
-using FluentAssertions;
+using TechTalk.SpecFlow;
 
 namespace SpecFlowSelenium.Steps
 {
@@ -13,11 +10,11 @@ namespace SpecFlowSelenium.Steps
     class BBCWeatherSteps
     {
 
-        WebConfiguration config;
+        DriverConfiguration config;
         IWebDriver driver;
         WeatherHomePage weatherHomePage;
 
-        public BBCWeatherSteps(WebConfiguration configuration)
+        public BBCWeatherSteps(DriverConfiguration configuration)
         {
             this.config = configuration;
             driver = configuration.GetWebDriver();

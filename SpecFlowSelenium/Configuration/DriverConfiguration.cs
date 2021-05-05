@@ -3,25 +3,32 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Remote;
 using System;
 using System.IO;
 
 namespace SpecFlowSelenium.Configuration
 {
 
-    class WebConfiguration
+    class DriverConfiguration
     {
         private string browser;
-        private IWebDriver webDriver;
+        private RemoteWebDriver webDriver;
         IConfiguration config;
 
 
 
-        public WebConfiguration()
+        public DriverConfiguration()
         {
             readConfigFile();
             setBrowser();
             setWebDriver();
+        }
+
+        public string getScreenShotBase64()
+        {
+            return webDriver.GetScreenshot().AsBase64EncodedString;
+
         }
 
         private void readConfigFile()
