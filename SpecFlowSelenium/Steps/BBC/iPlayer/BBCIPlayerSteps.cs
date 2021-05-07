@@ -1,5 +1,6 @@
 using FluentAssertions;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Remote;
 using SpecFlowSelenium.Configuration;
 using SpecFlowSelenium.PageObjects.BBC.iPlayer;
 using System;
@@ -12,7 +13,7 @@ namespace SpecFlowSelenium.Steps
     {
 
         DriverConfiguration config;
-        IWebDriver driver;
+        RemoteWebDriver driver;
         IPlayerHomePage iPlayerHomePage;
 
         public BBCIPlayerSteps(DriverConfiguration configuration)

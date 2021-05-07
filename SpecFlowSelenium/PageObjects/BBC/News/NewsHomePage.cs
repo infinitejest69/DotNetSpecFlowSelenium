@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Remote;
 using SeleniumExtras.PageObjects;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ namespace SpecFlowSelenium.PageObjects.BBC.News
 {
     class NewsHomePage
     {
-        private IWebDriver Driver;
+        private RemoteWebDriver Driver;
         public string PageUrl { get; } = "https://www.bbc.co.uk/news";
         private string MenuSearch = ".//li/a/span[contains(text(),'replace')]";
 
@@ -15,7 +16,7 @@ namespace SpecFlowSelenium.PageObjects.BBC.News
         [CacheLookup]
         public IList<IWebElement> CSectionLinkList { get; set; }
 
-        public NewsHomePage(IWebDriver driver)
+        public NewsHomePage(RemoteWebDriver driver)
         {
             this.Driver = driver ?? throw new ArgumentNullException(nameof(driver));
             PageFactory.InitElements(driver, this);

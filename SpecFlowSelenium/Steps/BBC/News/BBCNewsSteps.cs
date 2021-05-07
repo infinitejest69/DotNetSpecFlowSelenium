@@ -1,5 +1,6 @@
 using FluentAssertions;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Remote;
 using SpecFlowSelenium.Configuration;
 using SpecFlowSelenium.PageObjects.BBC.News;
 using TechTalk.SpecFlow;
@@ -11,7 +12,7 @@ namespace SpecFlowSelenium.Steps
     {
 
         DriverConfiguration config;
-        IWebDriver driver;
+        RemoteWebDriver driver;
         NewsHomePage newsHome;
 
         public BBCNewsSteps(DriverConfiguration configuration)

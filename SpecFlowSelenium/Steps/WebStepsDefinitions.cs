@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Remote;
 using SpecFlowSelenium.Configuration;
 using TechTalk.SpecFlow;
 
@@ -8,7 +9,7 @@ namespace SpecFlowSelenium.Steps
     class WebStepsDefinitions
     {
         DriverConfiguration config;
-        IWebDriver driver;
+        RemoteWebDriver driver;
         public WebStepsDefinitions(DriverConfiguration configuration)
         {
             this.config = configuration;

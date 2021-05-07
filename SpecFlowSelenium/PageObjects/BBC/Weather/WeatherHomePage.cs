@@ -1,4 +1,5 @@
 using OpenQA.Selenium;
+using OpenQA.Selenium.Remote;
 using SeleniumExtras.PageObjects;
 using System;
 
@@ -7,7 +8,7 @@ namespace SpecFlowSelenium.PageObjects.BBC.Weather
 {
     public class WeatherHomePage
     {
-        private IWebDriver Driver;
+        private RemoteWebDriver Driver;
         public string PageUrl { get; } = "https://www.bbc.co.uk/weather";
 
 
@@ -23,7 +24,7 @@ namespace SpecFlowSelenium.PageObjects.BBC.Weather
         [CacheLookup]
         public IWebElement locationTitle { get; set; }
 
-        public WeatherHomePage(IWebDriver driver)
+        public WeatherHomePage(RemoteWebDriver driver)
         {
             this.Driver = driver ?? throw new ArgumentNullException(nameof(driver));
             PageFactory.InitElements(driver, this);

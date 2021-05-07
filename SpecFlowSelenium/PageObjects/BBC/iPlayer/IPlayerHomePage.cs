@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Remote;
 using SeleniumExtras.PageObjects;
 using System;
 
@@ -6,7 +7,7 @@ namespace SpecFlowSelenium.PageObjects.BBC.iPlayer
 {
     class IPlayerHomePage
     {
-        private IWebDriver Driver;
+        private RemoteWebDriver Driver;
         public string PageUrl { get; } = "https://www.bbc.co.uk/iplayer";
         private string ChannelIconstring { get; } = ".//*[@href='#iplayer-icon-replace-active']";
 
@@ -22,7 +23,7 @@ namespace SpecFlowSelenium.PageObjects.BBC.iPlayer
         [CacheLookup]
         public IWebElement TodaysDate { get; set; }
 
-        public IPlayerHomePage(IWebDriver driver)
+        public IPlayerHomePage(RemoteWebDriver driver)
         {
             this.Driver = driver ?? throw new ArgumentNullException(nameof(driver));
             PageFactory.InitElements(Driver, this);
