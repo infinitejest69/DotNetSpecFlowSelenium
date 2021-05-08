@@ -13,7 +13,7 @@ namespace SpecFlowSelenium.Steps
     {
 
         DriverConfiguration config;
-        RemoteWebDriver driver;
+        IWebDriver driver;
         IPlayerHomePage iPlayerHomePage;
 
         public BBCIPlayerSteps(DriverConfiguration configuration)

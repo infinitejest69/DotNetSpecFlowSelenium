@@ -9,7 +9,7 @@ namespace SpecFlowSelenium.Steps
     class WebStepsDefinitions
     {
         DriverConfiguration config;
-        RemoteWebDriver driver;
+        IWebDriver driver;
         public WebStepsDefinitions(DriverConfiguration configuration)
         {
             this.config = configuration;

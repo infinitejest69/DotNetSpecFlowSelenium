@@ -13,7 +13,7 @@ namespace SpecFlowSelenium.Steps
     {
 
         DriverConfiguration config;
-        RemoteWebDriver driver;
+        IWebDriver driver;
         SportsHomePage sportsHomePage;
 
         public BBCSportsSteps(DriverConfiguration configuration)

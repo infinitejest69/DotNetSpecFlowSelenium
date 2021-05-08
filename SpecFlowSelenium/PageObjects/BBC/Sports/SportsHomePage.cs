@@ -8,7 +8,7 @@ namespace SpecFlowSelenium.PageObjects.BBC.Sports
 
     class SportsHomePage
     {
-        private RemoteWebDriver Driver;
+        private IWebDriver Driver;
         public string PageUrl { get; } = "https://www.bbc.co.uk/sport";
 
         private string menustring = ".//*[@data-stat-name='primary-nav-v2'][contains(text(),'replace')]";
@@ -18,7 +18,7 @@ namespace SpecFlowSelenium.PageObjects.BBC.Sports
         [CacheLookup]
         public IWebElement pageTitle { get; set; }
 
-        public SportsHomePage(RemoteWebDriver driver)
+        public SportsHomePage(IWebDriver driver)
         {
             this.Driver = driver ?? throw new ArgumentNullException(nameof(driver));
             PageFactory.InitElements(Driver, this);

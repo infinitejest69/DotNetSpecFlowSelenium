@@ -62,9 +62,20 @@ namespace SpecFlowSelenium.Configuration
             if (!string.IsNullOrEmpty(getSeleniumHub()))
             {
                 //CHROME and IE            
-                ChromeOptions Options = new ChromeOptions();
-                Options.AddArguments(new List<string>() { "headless" });
+                //ChromeOptions Options = new ChromeOptions();
 
+                //Options.AddArgument("--headless");
+                //Options.AddArgument("--whitelisted-ips");
+                //Options.AddArgument("--no-sandbox");
+                //Options.AddArgument("--disable-extensions");
+                //this.driver = new ChromeDriver(options);
+
+                webDriver = new FirefoxDriver();
+                FirefoxOptions Options = new FirefoxOptions();
+
+
+                //Options.AcceptInsecureCertificates = true;
+                //Options.AddArguments(new List<string>() { "headless" });
                 ////InternetExplorerOptions Options = new InternetExplorerOptions();
                 //Options.PlatformName = "windows";
                 //Options.AddAdditionalCapability("platform", "WIN10", true); // Supported values: "VISTA" (Windows 7), "WIN8" (Windows 8), "WIN8_1" (windows 8.1), "WIN10" (Windows 10), "LINUX" (Linux)
@@ -75,7 +86,7 @@ namespace SpecFlowSelenium.Configuration
 
 
                 webDriver = new RemoteWebDriver(
-                  new Uri(getSeleniumHub()), Options.ToCapabilities(), TimeSpan.FromSeconds(600));// NOTE: connection timeout of 600 seconds or more required for time to launch grid nodes if non are available.
+                  new Uri(getSeleniumHub()), Options.ToCapabilities(), TimeSpan.FromMinutes(5));// NOTE: connection timeout of 600 seconds or more required for time to launch grid nodes if non are available.
 
                 //webDriver.Manage().Window.Maximize(); // WINDOWS, DO NOT WORK FOR LINUX/firefox. If Linux/firefox set window size, max 1920x1080, like driver.Manage().Window.Size = new Size(1920, 1080);
                                                       // driver.Manage().Window.Size = new Size(1920, 1080); // LINUX/firefox			 
@@ -114,7 +125,7 @@ namespace SpecFlowSelenium.Configuration
 
         }
 
-        public RemoteWebDriver GetWebDriver()
+        public IWebDriver GetWebDriver()
         {
             return webDriver;
         }

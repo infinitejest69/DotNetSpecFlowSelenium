@@ -12,7 +12,7 @@ namespace SpecFlowSelenium.Steps
     {
 
         DriverConfiguration config;
-        RemoteWebDriver driver;
+        IWebDriver driver;
         WeatherHomePage weatherHomePage;
 
         public BBCWeatherSteps(DriverConfiguration configuration)

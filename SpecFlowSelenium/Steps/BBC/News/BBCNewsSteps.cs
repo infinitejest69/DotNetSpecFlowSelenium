@@ -12,7 +12,7 @@ namespace SpecFlowSelenium.Steps
     {
 
         DriverConfiguration config;
-        RemoteWebDriver driver;
+        IWebDriver driver;
         NewsHomePage newsHome;
 
         public BBCNewsSteps(DriverConfiguration configuration)
