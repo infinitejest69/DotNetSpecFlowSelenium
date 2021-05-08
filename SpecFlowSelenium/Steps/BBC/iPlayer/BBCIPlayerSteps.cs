@@ -1,6 +1,5 @@
 using FluentAssertions;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
 using SpecFlowSelenium.Configuration;
 using SpecFlowSelenium.PageObjects.BBC.iPlayer;
 using System;
@@ -11,24 +10,21 @@ namespace SpecFlowSelenium.Steps
     [Binding]
     class BBCIPlayerSteps
     {
-
-        DriverConfiguration config;
-        IWebDriver driver;
-        IPlayerHomePage iPlayerHomePage;
+        readonly DriverConfiguration config;
+        readonly IWebDriver driver;
+        readonly IPlayerHomePage iPlayerHomePage;
 
         public BBCIPlayerSteps(DriverConfiguration configuration)
         {
-            this.config = configuration;
-            driver = configuration.GetWebDriver();
+            config = configuration;
+            driver = configuration.WebDriver;
             iPlayerHomePage = new IPlayerHomePage(driver);
-
         }
 
         [When(@"i click tv guide")]
         public void WhenIClickTvGuide()
         {
             iPlayerHomePage.ClickMenuTVGuide();
-
         }
 
         [When(@"i click channel ""(.*)""")]

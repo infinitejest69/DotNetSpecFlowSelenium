@@ -1,6 +1,5 @@
 using FluentAssertions;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
 using SpecFlowSelenium.Configuration;
 using SpecFlowSelenium.PageObjects.BBC.News;
 using TechTalk.SpecFlow;
@@ -10,17 +9,15 @@ namespace SpecFlowSelenium.Steps
     [Binding]
     class BBCNewsSteps
     {
-
-        DriverConfiguration config;
-        IWebDriver driver;
-        NewsHomePage newsHome;
+        readonly DriverConfiguration config;
+        readonly IWebDriver driver;
+        readonly NewsHomePage newsHome;
 
         public BBCNewsSteps(DriverConfiguration configuration)
         {
-            this.config = configuration;
-            driver = configuration.GetWebDriver();
+            config = configuration;
+            driver = configuration.WebDriver;
             newsHome = new NewsHomePage(driver);
-
         }
 
         [When(@"i click news menu ""(.*)""")]

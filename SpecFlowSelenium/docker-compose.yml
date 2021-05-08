@@ -12,7 +12,7 @@ services:
       GRID_TIMEOUT: 3000
 
   chrome:
-    image: selenium/node-chrome-debug
+    image: selenium/node-chrome
     container_name: web-automation_chrome
     depends_on:
       - hub
@@ -43,4 +43,4 @@ services:
     ports:
       - "9002:5900"
     links:
-      - hub
+      - hub 

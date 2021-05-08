@@ -1,16 +1,13 @@
 using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
 using SeleniumExtras.PageObjects;
 using System;
-
 
 namespace SpecFlowSelenium.PageObjects.BBC.Weather
 {
     public class WeatherHomePage
     {
-        private IWebDriver Driver;
+        private readonly IWebDriver Driver;
         public string PageUrl { get; } = "https://www.bbc.co.uk/weather";
-
 
         [FindsBy(How = How.Id, Using = "ls-c-search__input-label")]
         [CacheLookup]
@@ -26,7 +23,7 @@ namespace SpecFlowSelenium.PageObjects.BBC.Weather
 
         public WeatherHomePage(IWebDriver driver)
         {
-            this.Driver = driver ?? throw new ArgumentNullException(nameof(driver));
+            Driver = driver ?? throw new ArgumentNullException(nameof(driver));
             PageFactory.InitElements(driver, this);
         }
 

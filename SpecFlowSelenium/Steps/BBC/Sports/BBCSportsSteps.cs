@@ -1,6 +1,5 @@
 using FluentAssertions;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
 using SpecFlowSelenium.Configuration;
 using SpecFlowSelenium.PageObjects.BBC.Sports;
 using TechTalk.SpecFlow;
@@ -11,23 +10,20 @@ namespace SpecFlowSelenium.Steps
 
     class BBCSportsSteps
     {
-
-        DriverConfiguration config;
-        IWebDriver driver;
-        SportsHomePage sportsHomePage;
+        readonly DriverConfiguration config;
+        readonly IWebDriver driver;
+        readonly SportsHomePage sportsHomePage;
 
         public BBCSportsSteps(DriverConfiguration configuration)
         {
-            this.config = configuration;
-            driver = configuration.GetWebDriver();
+            config = configuration;
+            driver = configuration.WebDriver;
             sportsHomePage = new SportsHomePage(driver);
-
         }
 
         [Then(@"i see current formula 1 driver table")]
         public void iSeeCurrentFormulaDriverTable()
         {
-
             sportsHomePage.getPageTitle().Should().BeEquivalentTo("FIA Formula 1 Standings");
         }
 
