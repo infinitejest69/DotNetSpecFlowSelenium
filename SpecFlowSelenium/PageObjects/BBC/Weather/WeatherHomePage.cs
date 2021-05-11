@@ -1,30 +1,36 @@
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.PageObjects;
+using SpecFlowSelenium.Configuration;
 using System;
+using System.Threading;
 
 namespace SpecFlowSelenium.PageObjects.BBC.Weather
 {
     public class WeatherHomePage
     {
         private readonly IWebDriver Driver;
+        private readonly IWait<IWebDriver> wait;
         public string PageUrl { get; } = "https://www.bbc.co.uk/weather";
 
         [FindsBy(How = How.Id, Using = "ls-c-search__input-label")]
-        [CacheLookup]
         public IWebElement locationSearchBar { get; set; }
 
         [FindsBy(How = How.XPath, Using = ".//input[@type='submit']")]
-        [CacheLookup]
         public IWebElement submitLocationButton { get; set; }
 
-        [FindsBy(How = How.Id, Using = "wr-location-name-id")]
-        [CacheLookup]
+        [FindsBy(How = How.XPath, Using = ".//*[@id='wr-location-name-id']")]
         public IWebElement locationTitle { get; set; }
 
-        public WeatherHomePage(IWebDriver driver)
+        public WeatherHomePage(DriverConfiguration configuration)
         {
-            Driver = driver ?? throw new ArgumentNullException(nameof(driver));
-            PageFactory.InitElements(driver, this);
+            if (configuration == null)
+                throw new ArgumentNullException(nameof(configuration));
+
+            Driver = configuration.WebDriver;
+            wait = configuration.Wait;
+
+            PageFactory.InitElements(Driver, this);
         }
 
         public void inputLocation(string location)
@@ -39,6 +45,8 @@ namespace SpecFlowSelenium.PageObjects.BBC.Weather
 
         public String getLocationText()
         {
+            
+            wait.Until(Driver => ((IJavaScriptExecutor)Driver).ExecuteScript("return document.readyState").Equals("complete"));
             return locationTitle.Text;
         }
     }

@@ -4,15 +4,17 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Support.UI;
 using System;
 using static SpecFlowSelenium.Configuration.Configuration;
 
 namespace SpecFlowSelenium.Configuration
 {
-    class DriverConfiguration
+    public class DriverConfiguration
     {
         private readonly Configuration configuration;
         public RemoteWebDriver WebDriver { get; private set; }
+        public IWait<IWebDriver> Wait  { get; private set; }
         private ICapabilities capabilities;
 
 
@@ -73,6 +75,8 @@ namespace SpecFlowSelenium.Configuration
                     WebDriver = new RemoteWebDriver(configuration.Hub, capabilities, TimeSpan.FromMinutes(5));// NOTE: connection timeout of 600 seconds or more required for time to launch grid nodes if non are available.
                     WebDriver.Manage().Window.Maximize();
                     WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(configuration.Timeout);
+                    Wait = new WebDriverWait(WebDriver, TimeSpan.FromSeconds(30.00));
+
                     break;
                 default:
                     throw new Exception("Somethings gone wrong creating the WebDriver in DriverConfiguration");

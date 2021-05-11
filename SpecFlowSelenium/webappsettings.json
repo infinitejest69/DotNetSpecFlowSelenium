@@ -1,6 +1,6 @@
 {
   "SeleniumHub": "http://localhost:4444/wd/hub",
-  "Environment": "Remote",
+  "Environment": "Local",
   "Browser": "Chrome",
   "ImplicitWait": 5
 }

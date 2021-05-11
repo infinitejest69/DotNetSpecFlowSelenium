@@ -9,15 +9,11 @@ namespace SpecFlowSelenium.Steps
     [Binding]
     class BBCWeatherSteps
     {
-        readonly DriverConfiguration config;
-        readonly IWebDriver driver;
         readonly WeatherHomePage weatherHomePage;
 
         public BBCWeatherSteps(DriverConfiguration configuration)
         {
-            config = configuration;
-            driver = configuration.WebDriver;
-            weatherHomePage = new WeatherHomePage(driver);
+            weatherHomePage = new WeatherHomePage(configuration);
         }
 
         [When(@"i input the location ""(.*)""")]
