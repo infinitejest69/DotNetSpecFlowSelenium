@@ -14,7 +14,7 @@ namespace SpecFlowSelenium.Configuration
     {
         private readonly Configuration configuration;
         public RemoteWebDriver WebDriver { get; private set; }
-        public IWait<IWebDriver> Wait  { get; private set; }
+        public IWait<IWebDriver> Wait { get; private set; }
         private ICapabilities capabilities;
 
 
@@ -46,9 +46,9 @@ namespace SpecFlowSelenium.Configuration
                             WebDriver = new EdgeDriver();
                             break;
                     }
+                    AddTimeouts();
                     break;
                 case Environemnt.REMOTE:
-
                     switch (configuration.browser)
                     {
                         case Browser.CHROME:
@@ -71,50 +71,22 @@ namespace SpecFlowSelenium.Configuration
                         default:
                             break;
                     }
-
-                    WebDriver = new RemoteWebDriver(configuration.Hub, capabilities, TimeSpan.FromMinutes(5));// NOTE: connection timeout of 600 seconds or more required for time to launch grid nodes if non are available.
-                    WebDriver.Manage().Window.Maximize();
-                    WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(configuration.Timeout);
-                    Wait = new WebDriverWait(WebDriver, TimeSpan.FromSeconds(30.00));
-
                     break;
+                    WebDriver = new RemoteWebDriver(configuration.Hub, capabilities, TimeSpan.FromMinutes(5));// NOTE: connection timeout of 600 seconds or more required for time to launch grid nodes if non are available.
+                    AddTimeouts();
+                    return;
+
                 default:
                     throw new Exception("Somethings gone wrong creating the WebDriver in DriverConfiguration");
             }
 
+        }
 
-            //CHROME and IE            
-            //ChromeOptions Options = new ChromeOptions();
-
-            //Options.AddArgument("--headless");
-            //Options.AddArgument("--whitelisted-ips");
-            //Options.AddArgument("--no-sandbox");
-            //Options.AddArgument("--disable-extensions");
-            //this.driver = new ChromeDriver(options);
-
-            //webDriver = new FirefoxDriver();
-            //    FirefoxOptions Options = new FirefoxOptions();
-
-            //Options.AcceptInsecureCertificates = true;
-            //Options.AddArguments(new List<string>() { "headless" });
-            ////InternetExplorerOptions Options = new InternetExplorerOptions();
-            //Options.PlatformName = "windows";
-            //Options.AddAdditionalCapability("platform", "WIN10", true); // Supported values: "VISTA" (Windows 7), "WIN8" (Windows 8), "WIN8_1" (windows 8.1), "WIN10" (Windows 10), "LINUX" (Linux)
-            //Options.AddAdditionalCapability("version", "latest", true); // you can specify version=latest or the version number like version="90". For IE you must always specify the version number.
-            //Options.AddAdditionalCapability("gridlasticUser", USERNAME, true);
-            //Options.AddAdditionalCapability("gridlasticKey", ACCESS_KEY, true);
-            //Options.AddAdditionalCapability("video", "True", true);
-
-            //webDriver.Manage().Window.Maximize(); // WINDOWS, DO NOT WORK FOR LINUX/firefox. If Linux/firefox set window size, max 1920x1080, like driver.Manage().Window.Size = new Size(1920, 1080);
-            // driver.Manage().Window.Size = new Size(1920, 1080); // LINUX/firefox			 
-
-            //var uri = getSeleniumHub();
-            //var capabilities = new ChromeOptions().ToCapabilities();
-            //var commandTimeout = TimeSpan.FromMinutes(5);
-            //webDriver = new RemoteWebDriver(new Uri(uri), capabilities, commandTimeout);
-
-
-
+        private void AddTimeouts()
+        {
+            WebDriver.Manage().Window.Maximize();
+            WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(configuration.Timeout);
+            Wait = new WebDriverWait(WebDriver, TimeSpan.FromSeconds(30.00));
         }
     }
 }
