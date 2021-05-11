@@ -45,8 +45,8 @@ namespace SpecFlowSelenium.PageObjects.BBC.Weather
 
         public String getLocationText()
         {
-            
-            wait.Until(Driver => ((IJavaScriptExecutor)Driver).ExecuteScript("return document.readyState").Equals("complete"));
+            //wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(".//*[@id='wr-location-name-id']")));
+            //var x = locationTitle.Text;
             return locationTitle.Text;
         }
     }
