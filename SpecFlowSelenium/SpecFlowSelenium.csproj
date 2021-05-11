@@ -53,4 +53,8 @@
     <None Include="Steps\BBC\Weather\BBCWeatherSteps.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Reports\" />
+  </ItemGroup>
+
 </Project>

@@ -7,9 +7,9 @@ namespace SpecFlowSelenium.PageObjects.BBC.News
 {
     class NewsHomePage
     {
-        private IWebDriver Driver;
+        private readonly IWebDriver Driver;
         public string PageUrl { get; } = "https://www.bbc.co.uk/news";
-        private string MenuSearch = ".//li/a/span[contains(text(),'replace')]";
+        private readonly string MenuSearch = ".//li/a/span[contains(text(),'replace')]";
 
         [FindsBy(How = How.XPath, Using = ".//li[2]/a[@class='gs-c-section-link gs-c-section-link--truncate nw-c-section-link nw-o-link nw-o-link--no-visited-state']/span")]
         [CacheLookup]
@@ -17,7 +17,7 @@ namespace SpecFlowSelenium.PageObjects.BBC.News
 
         public NewsHomePage(IWebDriver driver)
         {
-            this.Driver = driver ?? throw new ArgumentNullException(nameof(driver));
+            Driver = driver ?? throw new ArgumentNullException(nameof(driver));
             PageFactory.InitElements(driver, this);
         }
 

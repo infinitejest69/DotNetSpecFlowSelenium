@@ -6,7 +6,7 @@ namespace SpecFlowSelenium.PageObjects.BBC.iPlayer
 {
     class IPlayerHomePage
     {
-        private IWebDriver Driver;
+        private readonly IWebDriver Driver;
         public string PageUrl { get; } = "https://www.bbc.co.uk/iplayer";
         private string ChannelIconstring { get; } = ".//*[@href='#iplayer-icon-replace-active']";
 
@@ -24,7 +24,7 @@ namespace SpecFlowSelenium.PageObjects.BBC.iPlayer
 
         public IPlayerHomePage(IWebDriver driver)
         {
-            this.Driver = driver ?? throw new ArgumentNullException(nameof(driver));
+            Driver = driver ?? throw new ArgumentNullException(nameof(driver));
             PageFactory.InitElements(Driver, this);
         }
 
@@ -32,7 +32,6 @@ namespace SpecFlowSelenium.PageObjects.BBC.iPlayer
         {
             string channel = ChannelName.ToLower().Replace(" ", "");
             Driver.FindElement(By.XPath(ChannelIconstring.Replace("replace", channel))).Click();
-
         }
 
         public void ClickMenuA2Z()

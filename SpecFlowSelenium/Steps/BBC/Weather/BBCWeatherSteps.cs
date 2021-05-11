@@ -9,26 +9,18 @@ namespace SpecFlowSelenium.Steps
     [Binding]
     class BBCWeatherSteps
     {
-
-        DriverConfiguration config;
-        IWebDriver driver;
-        WeatherHomePage weatherHomePage;
+        readonly WeatherHomePage weatherHomePage;
 
         public BBCWeatherSteps(DriverConfiguration configuration)
         {
-            this.config = configuration;
-            driver = configuration.GetWebDriver();
-            weatherHomePage = new WeatherHomePage(driver);
-
+            weatherHomePage = new WeatherHomePage(configuration);
         }
-
 
         [When(@"i input the location ""(.*)""")]
         public void WhenIInputTheLocation(string location)
         {
             weatherHomePage.inputLocation(location);
         }
-
 
         [When(@"click search")]
         public void clickSearch()
@@ -39,7 +31,6 @@ namespace SpecFlowSelenium.Steps
         [Then(@"i see current weather for ""(.*)""")]
         public void iSeeCurrentWeatherFor(string location)
         {
-
             weatherHomePage.getLocationText().Should().BeEquivalentTo(location);
         }
     }

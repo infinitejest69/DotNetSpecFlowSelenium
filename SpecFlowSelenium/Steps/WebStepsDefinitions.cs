@@ -7,12 +7,12 @@ namespace SpecFlowSelenium.Steps
     [Binding]
     class WebStepsDefinitions
     {
-        DriverConfiguration config;
-        IWebDriver driver;
+        readonly DriverConfiguration config;
+        readonly IWebDriver driver;
         public WebStepsDefinitions(DriverConfiguration configuration)
         {
-            this.config = configuration;
-            driver = configuration.GetWebDriver();
+            config = configuration;
+            driver = configuration.WebDriver;
         }
 
         [Given]
@@ -20,6 +20,5 @@ namespace SpecFlowSelenium.Steps
         {
             driver.Navigate().GoToUrl(p0);
         }
-
     }
 }

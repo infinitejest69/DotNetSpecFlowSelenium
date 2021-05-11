@@ -10,7 +10,6 @@ namespace SpecFlowSelenium.Hooks
     [Binding]
     class Hooks
     {
-
         private static ExtentTest featureName;
         private static ExtentTest scenario;
         private static ExtentReports extent;
@@ -18,7 +17,6 @@ namespace SpecFlowSelenium.Hooks
         private static DriverConfiguration configuration;
         private readonly ScenarioContext _scenarioContext;
         private static FeatureContext _featureContext;
-
 
         public Hooks(IObjectContainer objectContainer, ScenarioContext scenarioContext, FeatureContext featureContext)
         {
@@ -38,9 +36,8 @@ namespace SpecFlowSelenium.Hooks
         [AfterScenario()]
         public void closeBrowser()
         {
-            configuration.GetWebDriver().Dispose();
+            configuration.WebDriver.Quit();
         }
-
 
         [BeforeTestRun]
         public static void InitializeReport()
@@ -70,7 +67,6 @@ namespace SpecFlowSelenium.Hooks
         [AfterStep]
         public void InsertReportingSteps()
         {
-
             var stepType = ScenarioStepContext.Current.StepInfo.StepDefinitionType.ToString();
 
             if (_scenarioContext.TestError == null)
@@ -105,8 +101,6 @@ namespace SpecFlowSelenium.Hooks
                         .Fail("details", MediaEntityBuilder.CreateScreenCaptureFromBase64String(configuration.getScreenShotBase64()).Build());
                 }
 
-
-
             }
 
             //Pending Status
@@ -118,11 +112,7 @@ namespace SpecFlowSelenium.Hooks
                     scenario.CreateNode<When>(ScenarioStepContext.Current.StepInfo.Text).Skip("Step Definition Pending");
                 else if (stepType == "Then")
                     scenario.CreateNode<Then>(ScenarioStepContext.Current.StepInfo.Text).Skip("Step Definition Pending");
-
             }
-
         }
-
-
     }
 }
