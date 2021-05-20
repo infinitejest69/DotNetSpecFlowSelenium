@@ -36,7 +36,7 @@ namespace SpecFlowSelenium.Hooks
         [AfterScenario()]
         public void closeBrowser()
         {
-            configuration.WebDriver.Quit();
+            configuration.WebDriver.Close();
         }
 
         [BeforeTestRun]
